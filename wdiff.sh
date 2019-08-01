@@ -52,6 +52,10 @@ do
 		if [ $2 -gt 0 ]
 		then
 			int=$2
+			if [ "$intf" = "ms" ]
+			then
+				int=$(($int / 1000))
+			fi
 			shift
 		else
 			echo "   \e[1;31mError\e[0m: interval must be greater than zero!"
@@ -62,7 +66,7 @@ do
 	then
 		case $2 in
 			"s") intf=$2																;;
-			"ms") intf=$2																;;
+			"ms") intf=$2; int=$(($int / 1000))											;;
 			*) echo "   \e[1;31mError\e[0m: wrong interval format!"; usehelp; exit 1	;;
 		esac
 		shift
@@ -75,8 +79,13 @@ do
 	shift
 done
 
-echo "thsep=${thsep}"
-echo "int=${int}"
-echo "intf=${intf}"
-echo "shell command=\"$1\""
+while true
+do
+	$1 > /tmp/wdiff1.poutput
+	sleep ${int}s
+	$1 > /tmp/wdiff2.poutput
+	
+	# Handling info...
+	
+done
 
