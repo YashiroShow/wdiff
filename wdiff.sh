@@ -52,10 +52,6 @@ do
 		if [ $2 -gt 0 ]
 		then
 			int=$2
-			if [ "$intf" = "ms" ]
-			then
-				int=$(($int / 1000))
-			fi
 			shift
 		else
 			echo "   \e[1;31mError\e[0m: interval must be greater than zero!"
@@ -66,7 +62,7 @@ do
 	then
 		case $2 in
 			"s") intf=$2																;;
-			"ms") intf=$2; int=$(($int / 1000))											;;
+			"ms") intf=$2																;;
 			*) echo "   \e[1;31mError\e[0m: wrong interval format!"; usehelp; exit 1	;;
 		esac
 		shift
@@ -78,6 +74,11 @@ do
 	
 	shift
 done
+
+if [ "$intf" = "ms" ]
+then
+	int=0$(echo "$int / 1000" | bc -l)
+fi
 
 while true
 do
