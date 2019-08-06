@@ -4,7 +4,7 @@ usage() {
 	echo ""
 	echo "Watching diff output in command numbers."
 	echo ""
-	echo "\e[1;31mUsage\e[0m: watchdiff.sh [-h | --help] [options] [-wd \"wordsDelimiter\"]"
+	echo "\e[1;31mUsage\e[0m: wdiff.sh [-h | --help] [options] [-wd \"wordsDelimiter\"]"
 	echo "                    [--awk-filter '/RegExp/'] [-i interval]"
 	echo "                    [-if intFormat] \"shell command\""
 	echo ""
